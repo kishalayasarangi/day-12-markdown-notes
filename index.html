@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Markdown Notes</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>📝 Notes</h2>
+      <button onclick="newNote()">+ New</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search notes..." oninput="searchNotes()"/>
+    </div>
+    <ul class="notes-list" id="notesList"></ul>
+  </aside>
+
+  <!-- MAIN EDITOR -->
+  <main class="main">
+
+    <div class="toolbar">
+      <input type="text" id="noteTitle" placeholder="Note title..." onchange="saveCurrentNote()"/>
+      <div class="toolbar-btns">
+        <button class="tb-btn" onclick="insertMd('**', '**')" title="Bold">B</button>
+        <button class="tb-btn italic" onclick="insertMd('*', '*')" title="Italic">I</button>
+        <button class="tb-btn" onclick="insertMd('# ', '')" title="Heading">H</button>
+        <button class="tb-btn" onclick="insertMd('- ', '')" title="List">☰</button>
+        <button class="tb-btn" onclick="insertMd('`', '`')" title="Code">{ }</button>
+        <button class="tb-btn" onclick="insertMd('[text](', 'url)')" title="Link">🔗</button>
+        <button class="view-toggle" onclick="toggleView()" id="viewToggle">👁 Preview</button>
+        <button class="delete-btn" onclick="deleteNote()">🗑 Delete</button>
+      </div>
+    </div>
+
+    <div class="editor-area">
+      <textarea id="editor" placeholder="Write your note in Markdown...
+# Heading
+**bold** | *italic* | `code`
+- list item" oninput="saveCurrentNote(); updatePreview()"></textarea>
+      <div class="preview hidden" id="preview"></div>
+    </div>
+
+    <div class="statusbar">
+      <span id="wordCount">0 words</span>
+      <span id="charCount">0 chars</span>
+      <span id="saveStatus">No note selected</span>
+    </div>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
